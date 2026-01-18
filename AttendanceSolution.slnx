@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="Attendance.Web/Attendance.Web.csproj" Id="30619086-4ce4-41b8-9a41-3d431ce43df0" />
+  </Folder>
+</Solution>
