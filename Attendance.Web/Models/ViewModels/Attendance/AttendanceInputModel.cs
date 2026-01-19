@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,8 +8,12 @@ namespace Attendance.Web.Models.ViewModels.Attendance
 {
     public class AttendanceInputModel
     {
-        //rappresenta cio che l'utente invia (fare validazione)
-
+        [Required]
+        public int DayId { get; set; }
+        [Required]
+        public int PersonId { get; set; }
+        [Required]
+        public bool isAvailable { get; set; }
 
     }
 }

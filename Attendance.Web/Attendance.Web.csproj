@@ -157,6 +157,9 @@
     <Compile Include="Models\Database\Person.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\Attendance\AttendanceInputModel.cs" />
+    <Compile Include="Models\ViewModels\Attendance\AttendanceListItemViewModel.cs" />
+    <Compile Include="Models\ViewModels\Attendance\AttendanceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +235,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Exceptions\" />
     <Folder Include="Extensions\" />
-    <Folder Include="Models\ViewModels\Attendance\" />
+    <Folder Include="Models\ViewModels\Day\" />
     <Folder Include="Models\ViewModels\Person\" />
   </ItemGroup>
   <ItemGroup>
