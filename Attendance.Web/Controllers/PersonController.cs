@@ -19,22 +19,18 @@ namespace Attendance.Web.Controllers
         }
 
         // GET: Person
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Person
         public async Task<ActionResult> Index()
         {
             var persons = await _personService.GetAllPersonsAsync();
             return View(persons);
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // GET: Person/Create
         public ActionResult Create()
         {
             return View();
+            //serve solo x mostrare il form vuoto. non serve async o services
         }
 
         // POST: Person/Create
@@ -42,11 +38,12 @@ namespace Attendance.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(PersonViewModel model)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 await _personService.AddPersonAsync(model);
                 return RedirectToAction("Index");
             }
+            //altrimenti...
             return View(model);
         }
 
@@ -56,6 +53,7 @@ namespace Attendance.Web.Controllers
             var person = await _personService.GetPersonByIdAsync(id);
             if (person == null) return HttpNotFound();
             return View(person);
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // POST: Person/Edit/5

@@ -20,6 +20,7 @@ namespace Attendance.Web.Controllers
         public ActionResult Index()
         {
             return View();
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // GET: /Day/Today
@@ -27,14 +28,17 @@ namespace Attendance.Web.Controllers
         {
             DateTime today = await _dayService.GetTodayAsync();
             int dayId = await _dayService.GetOrCreateDayIdAsync(today);
-            return RedirectToAction("Details", new { id = dayId });
+            return RedirectToAction(
+                "Details",  //actionName (nome del method nel controller di destinazione)
+                new { id = dayId }  //routeValues (params passati al method)
+            );
         }
 
         // GET: /Day/Details/5
         public async Task<ActionResult> Details(int id)
         {
-            // qui potresti mostrare la view per il giorno specifico
-            // ad esempio, passare dayId alla view per usare in AttendanceController
+            //qui potresti mostrare la view per il giorno specifico
+            //ad esempio, passare dayId alla view per usare in AttendanceController
             ViewBag.DayId = id;
             return View();
         }
