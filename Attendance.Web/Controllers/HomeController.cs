@@ -11,8 +11,8 @@ namespace Attendance.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IDayService _dayService;
-
-        public HomeController(IDayService dayService)
+        public HomeController(IDayService dayService)  
+            //auto injection by mvc, check file App_Start/UnityConfig.cs x more
         {
             _dayService = dayService;
         }

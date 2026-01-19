@@ -1,0 +1,42 @@
+﻿@model IList<Attendance.Web.Models.ViewModels.Attendance.AttendancePersonRowViewModel>
+@{
+    ViewBag.Title = "Attendance";
+    int dayId = (int)ViewBag.DayId;
+}
+<h2>Attendance</h2>
+@using (Html.BeginForm("Update", "Attendance", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("dayId", dayId)
+    <table class="table">
+        <tr>
+            <th>Person</th>
+            <th>Present</th>
+            <th>Absent</th>
+        </tr>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model[i].FirstName @Model[i].LastName
+                    @Html.Hidden($"inputs[{i}].PersonId", Model[i].PersonId)
+                </td>
+                <td>
+                    <input type="radio"
+                           name="inputs[@i].isAvailable"
+                           value="true"
+                           @(Model[i].isAvailable == true ? "checked" : "") />
+                </td>
+                <td>
+                    <input type="radio"
+                           name="inputs[@i].isAvailable"
+                           value="false"
+                           @(Model[i].isAvailable == false ? "checked" : "") />
+                </td>
+            </tr>
+        }
+    </table>
+    <button type="submit" class="btn btn-primary">
+        Save
+    </button>
+}

@@ -1,0 +1,19 @@
+﻿@model Attendance.Web.Models.ViewModels.Person.PersonViewModel
+@{
+    ViewBag.Title = "Edit Person";
+}
+<h2>Edit Person</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.PersonId)
+    <div>
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+    </div>
+    <button type="submit">Save</button>
+}

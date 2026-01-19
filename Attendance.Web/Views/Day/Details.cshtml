@@ -1,0 +1,10 @@
+﻿@{
+    ViewBag.Title = "Day details";
+    int dayId = (int)ViewBag.DayId;
+}
+<h2>Day @dayId</h2>
+<p>
+    <a href="@Url.Action("Day", "Attendance", new { dayId = dayId })">
+        Manage attendance
+    </a>
+</p>
