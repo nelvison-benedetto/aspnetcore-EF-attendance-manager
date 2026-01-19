@@ -67,20 +67,20 @@ namespace Attendance.Web.Services.Implementations
                 //        isAvailable = att != null ? (bool?)att.IsAvailable : null
                 //    };
 
-                var query = db.Person
+                return await db.Person
                     .Select( p => new AttendancePersonRowViewModel
                     {
                         PersonId = p.PersonId,
                         FirstName = p.FirstName,
                         LastName = p.LastName,
-                        isAvailable =  p.Attendance  //sfrutta le navigation props!!
+                        isAvailable =  p.Attendance  //sfrutta le navigation props!!(check entity EF generate dall’ .edmx)
                             .Where( a => a.DayId == dayId)  
                                 //solo fra le Attendence di QUESTO p, filtra per DaiId
                             .Select( a => (bool?)a.IsAvailable)  //LA QUERY ORA PRODUCE un bool, non piu un Attendance!! '?' xk puo essere nulle se lo è vuoi value null
                             .FirstOrDefault()  
                                 //se esite una row Attendance return true or false, altrimenti null
-                    });
-                return await query.ToListAsync();
+                    })
+                    .ToListAsync();
             }
         }
 

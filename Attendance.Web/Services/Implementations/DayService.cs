@@ -30,7 +30,7 @@ namespace Attendance.Web.Services.Implementations
                     return existingDay.DayId;  //return existing found dayId of target day, solo un number
                 }
 
-                //##creation (CREATE) new Day
+                //##CREATE new Day
                 var newDay = new Day  //temp instance, compili TUTTI i fields che sono NOT NULL sul db!!
                 {
                     AttendanceDate = day
