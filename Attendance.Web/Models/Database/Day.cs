@@ -17,13 +17,13 @@ namespace Attendance.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Day()
         {
-            this.Attendances = new HashSet<Attendance>();
+            this.Attendance = new HashSet<Attendance>();
         }
     
         public int DayId { get; set; }
         public System.DateTime AttendanceDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual ICollection<Attendance> Attendance { get; set; }
     }
 }

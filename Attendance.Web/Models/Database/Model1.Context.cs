@@ -25,8 +25,8 @@ namespace Attendance.Web.Models.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Attendance> Attendances { get; set; }
-        public virtual DbSet<Day> Days { get; set; }
-        public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<Attendance> Attendance { get; set; }
+        public virtual DbSet<Day> Day { get; set; }
+        public virtual DbSet<Person> Person { get; set; }
     }
 }

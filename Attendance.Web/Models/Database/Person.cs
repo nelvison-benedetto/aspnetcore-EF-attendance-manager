@@ -17,7 +17,7 @@ namespace Attendance.Web.Models.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Person()
         {
-            this.Attendances = new HashSet<Attendance>();
+            this.Attendance = new HashSet<Attendance>();
         }
     
         public int PersonId { get; set; }
@@ -25,6 +25,6 @@ namespace Attendance.Web.Models.Database
         public string LastName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Attendance> Attendances { get; set; }
+        public virtual ICollection<Attendance> Attendance { get; set; }
     }
 }

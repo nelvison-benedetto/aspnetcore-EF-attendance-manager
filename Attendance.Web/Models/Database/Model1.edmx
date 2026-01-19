@@ -88,7 +88,7 @@
           </Key>
           <Property Name="DayId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AttendanceDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Day" FromRole="Day" ToRole="Attendance" />
+          <NavigationProperty Name="Attendance" Relationship="Self.FK_Attendance_Day" FromRole="Day" ToRole="Attendance" />
         </EntityType>
         <EntityType Name="Person">
           <Key>
@@ -97,7 +97,7 @@
           <Property Name="PersonId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Attendances" Relationship="Self.FK_Attendance_Person" FromRole="Person" ToRole="Attendance" />
+          <NavigationProperty Name="Attendance" Relationship="Self.FK_Attendance_Person" FromRole="Person" ToRole="Attendance" />
         </EntityType>
         <Association Name="FK_Attendance_Day">
           <End Role="Day" Type="Self.Day" Multiplicity="1" />
@@ -124,16 +124,16 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="AttendanceDbContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Attendances" EntityType="Self.Attendance" />
-          <EntitySet Name="Days" EntityType="Self.Day" />
-          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Attendance" EntityType="Self.Attendance" />
+          <EntitySet Name="Day" EntityType="Self.Day" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
           <AssociationSet Name="FK_Attendance_Day" Association="Self.FK_Attendance_Day">
-            <End Role="Day" EntitySet="Days" />
-            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="Day" EntitySet="Day" />
+            <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
           <AssociationSet Name="FK_Attendance_Person" Association="Self.FK_Attendance_Person">
-            <End Role="Person" EntitySet="People" />
-            <End Role="Attendance" EntitySet="Attendances" />
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Attendance" EntitySet="Attendance" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -142,7 +142,7 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="ModelsDatabaseStoreContainer" CdmEntityContainer="AttendanceDbContext">
-          <EntitySetMapping Name="Attendances">
+          <EntitySetMapping Name="Attendance">
             <EntityTypeMapping TypeName="Models.Database.Attendance">
               <MappingFragment StoreEntitySet="Attendance">
                 <ScalarProperty Name="AttendanceId" ColumnName="AttendanceId" />
@@ -152,7 +152,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Days">
+          <EntitySetMapping Name="Day">
             <EntityTypeMapping TypeName="Models.Database.Day">
               <MappingFragment StoreEntitySet="Day">
                 <ScalarProperty Name="DayId" ColumnName="DayId" />
@@ -160,7 +160,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="People">
+          <EntitySetMapping Name="Person">
             <EntityTypeMapping TypeName="Models.Database.Person">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="PersonId" ColumnName="PersonId" />
@@ -183,7 +183,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
