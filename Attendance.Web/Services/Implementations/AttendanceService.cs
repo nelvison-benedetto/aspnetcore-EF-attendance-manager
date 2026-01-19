@@ -1,5 +1,6 @@
 ﻿using Attendance.Web.Models.Database;
 using Attendance.Web.Models.ViewModels.Attendance;
+using Attendance.Web.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,7 +12,7 @@ namespace Attendance.Web.Services.Implementations
 {
     //x more info check DayService.cs e PersonService.cs
 
-    public class AttendanceService
+    public class AttendanceService : IAttendanceService
     {
         public async Task<IList<AttendancePersonRowViewModel>> GetAttendanceForDayAsync(int dayId)
         {
@@ -111,6 +112,7 @@ namespace Attendance.Web.Services.Implementations
                 await db.SaveChangesAsync();  //scrive sul db
             }
         }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Attendance.Web.Models.Database;
+using Attendance.Web.Services.Contracts;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Attendance.Web.Services.Implementations
 {
-    public class DayService 
+    public class DayService : IDayService
     {
         public async Task<int> GetOrCreateDayIdAsync(DateTime date)
         {

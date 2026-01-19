@@ -1,6 +1,7 @@
 ﻿using Attendance.Web.Models.Database;
 using Attendance.Web.Models.ViewModels.Attendance;
 using Attendance.Web.Models.ViewModels.Person;
+using Attendance.Web.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -12,7 +13,7 @@ namespace Attendance.Web.Services.Implementations
 {
     //x more info check DayService.cs
 
-    public class PersonService
+    public class PersonService : IPersonService
     {
         public async Task<IList<PersonViewModel>> GetAllPersonsAsync() {
             using (var db = new AttendanceDbContext()) {

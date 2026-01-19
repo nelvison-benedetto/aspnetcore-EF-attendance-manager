@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace Attendance.Web.Services.Implementations
+namespace Attendance.Web.Services.Contracts
 {
     public interface IDayService
     {
