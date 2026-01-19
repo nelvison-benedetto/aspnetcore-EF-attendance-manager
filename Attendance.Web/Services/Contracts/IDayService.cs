@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace Attendance.Web.Services.Contracts
+namespace Attendance.Web.Services.Implementations
 {
     public interface IDayService
     {
+        Task<int> GetOrCreateDayIdAsync(DateTime date);
+        Task<DateTime> GetTodayAsync();
     }
 }
