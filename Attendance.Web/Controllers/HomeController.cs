@@ -22,7 +22,6 @@ namespace Attendance.Web.Controllers
         {
             // Ottieni il giorno corrente
             int todayId = await _dayService.GetOrCreateDayIdAsync(await _dayService.GetTodayAsync());
-
             // Reindirizza subito alla view del giorno di oggi
             return RedirectToAction("Day", "Attendance", new { dayId = todayId });
         }
