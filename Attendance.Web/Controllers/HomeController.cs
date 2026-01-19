@@ -30,7 +30,6 @@ namespace Attendance.Web.Controllers
             );
         }
 
-
         // GET: /Home/About
         public ActionResult About()
         {
