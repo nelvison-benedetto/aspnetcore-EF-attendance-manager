@@ -8,7 +8,7 @@ namespace Attendance.Web.Services.Implementations
 {
     public class DayService
     {
-        public async Task<int> GetOrCreateDayId(DateTime date) {
+        public async Task<int> GetOrCreateDayIdAsync(DateTime date) {
             using (var db = new AttendanceDbContext()) {
                 db.Database.Log = (msg) => Console.WriteLine(msg);  //x debug
                 DateTime day = date.Date; //x only day no hours ect
@@ -30,7 +30,7 @@ namespace Attendance.Web.Services.Implementations
             }
         }
 
-        public Task<DateTime> GetToday() { 
+        public Task<DateTime> GetTodayAsync(){ 
             return Task.FromResult(DateTime.Today);
         }
 
