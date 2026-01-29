@@ -13,6 +13,7 @@ namespace Attendance.Web.Controllers
     public class AttendanceController : Controller
     {
         private readonly IAttendanceService _attendanceService;
+
         public AttendanceController(IAttendanceService attendanceService)
         {
             _attendanceService = attendanceService;
@@ -22,6 +23,7 @@ namespace Attendance.Web.Controllers
         public ActionResult Index()
         {
             return View();
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // GET: /Attendance/Day/5
@@ -31,6 +33,7 @@ namespace Attendance.Web.Controllers
                 await _attendanceService.GetAttendanceForDayAsync(dayId);
             ViewBag.DayId = dayId;
             return View(attendance);
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // POST: /Attendance/Update

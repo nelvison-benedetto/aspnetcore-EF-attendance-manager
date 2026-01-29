@@ -34,15 +34,17 @@ namespace Attendance.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Questa è la web app per la gestione delle presenze.";
-            return View();  
+            return View();
             //MVC cerca auto view razor /Views/{Controller}/{Action}.cshtml
-            //quindi .../About.cshtml
+            //Views/{Controller}/{Action}.cshtml
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
             return View();
+            //Views/{Controller}/{Action}.cshtml
         }
+
     }
 }

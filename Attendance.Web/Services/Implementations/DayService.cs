@@ -9,6 +9,7 @@ namespace Attendance.Web.Services.Implementations
 {
     public class DayService : IDayService
     {
+
         public async Task<int> GetOrCreateDayIdAsync(DateTime date)
         {
             using (var db = new AttendanceDbContext())

@@ -85,38 +85,122 @@ namespace Attendance.Web.Services.Implementations
             }
         }
 
-        public async Task<int> AddPersonAsync(PersonViewModel person)
+        public async Task<int> AddPersonWithAttendanceAsync(CreatePersonAttendanceViewModel model)
         {
             using (var db = new AttendanceDbContext())
             {
                 db.Database.Log = msg => Console.WriteLine(msg);
-                var newPerson = new Person  //compila tutti i fields che sono NOT NULL sul db!
+
+                // 1️⃣ Recupero il Day esistente
+                var day = await db.Day
+                    .FirstOrDefaultAsync(d => d.DayId == model.DayId);
+
+                if (day == null)
+                    throw new Exception("Day non trovato");
+
+                // 2️⃣ Creo la nuova Person
+                var person = new Person
                 {
-                    FirstName = person.FirstName,
-                    LastName = person.LastName
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
                 };
-                db.Person.Add(newPerson);
+
+                // 3️⃣ Creo l'Attendance e collego TUTTO con navigation properties
+                var attendance = new Attendance
+                {
+                    Day = day,                // relazione con Day
+                    Person = person,          // relazione con Person
+                    IsAvailable = model.IsAvailable
+                };
+
+                // 4️⃣ Aggiungo SOLO la Person (EF capisce tutto il grafo)
+                db.Person.Add(person);
+
+                // 5️⃣ Salvo
                 await db.SaveChangesAsync();
-                return newPerson.PersonId;
+
+                // 6️⃣ Ritorno l'id della nuova Person
+                return person.PersonId;
             }
         }
 
-        public async Task UpdatePersonAsync(PersonViewModel person)
+        public async Task UpdatePersonWithAttendanceAsync(UpdatePersonAttendanceViewModel model)
         {
             using (var db = new AttendanceDbContext())
             {
                 db.Database.Log = msg => Console.WriteLine(msg);
-                var existingPerson = await db.Person
-                    .FirstOrDefaultAsync( p => p.PersonId == person.PersonId );
-                if (existingPerson != null)
+
+                // 1️⃣ Carico Person + Attendance
+                var person = await db.Person
+                    .Include(p => p.Attendance)
+                    .FirstOrDefaultAsync(p => p.PersonId == model.PersonId);
+
+                if (person == null)
+                    throw new Exception("Person non trovata");
+
+                // 2️⃣ Update dati Person
+                person.FirstName = model.FirstName;
+                person.LastName = model.LastName;
+
+                // 3️⃣ Cerco l'Attendance per quel Day
+                var attendance = person.Attendance
+                    .FirstOrDefault(a => a.DayId == model.DayId);
+
+                if (attendance != null)
                 {
-                    existingPerson.FirstName = person.FirstName;
-                    existingPerson.LastName = person.LastName;
-                    await db.SaveChangesAsync();
+                    // 4️⃣ UPDATE Attendance esistente
+                    attendance.IsAvailable = model.IsAvailable;
                 }
-                
+                else
+                {
+                    // 5️⃣ INSERT nuova Attendance
+                    attendance = new Attendance
+                    {
+                        PersonId = person.PersonId,
+                        DayId = model.DayId,
+                        IsAvailable = model.IsAvailable
+                    };
+
+                    person.Attendance.Add(attendance);
+                }
+
+                // 6️⃣ Save
+                await db.SaveChangesAsync();
             }
         }
+
+        //public async Task<int> AddPersonAsync(PersonViewModel person)
+        //{
+        //    using (var db = new AttendanceDbContext())
+        //    {
+        //        db.Database.Log = msg => Console.WriteLine(msg);
+        //        var newPerson = new Person  //compila tutti i fields che sono NOT NULL sul db!
+        //        {
+        //            FirstName = person.FirstName,
+        //            LastName = person.LastName
+        //        };
+        //        db.Person.Add(newPerson);
+        //        await db.SaveChangesAsync();
+        //        return newPerson.PersonId;
+        //    }
+        //}
+
+        //public async Task UpdatePersonAsync(PersonViewModel person)
+        //{
+        //    using (var db = new AttendanceDbContext())
+        //    {
+        //        db.Database.Log = msg => Console.WriteLine(msg);
+        //        var existingPerson = await db.Person
+        //            .FirstOrDefaultAsync( p => p.PersonId == person.PersonId );
+        //        if (existingPerson != null)
+        //        {
+        //            existingPerson.FirstName = person.FirstName;
+        //            existingPerson.LastName = person.LastName;
+        //            await db.SaveChangesAsync();
+        //        }
+                
+        //    }
+        //}
 
 
     }

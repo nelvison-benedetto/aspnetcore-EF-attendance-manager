@@ -14,6 +14,7 @@ namespace Attendance.Web.Services.Implementations
 
     public class AttendanceService : IAttendanceService
     {
+
         public async Task<IList<AttendancePersonRowViewModel>> GetAttendanceForDayAsync(int dayId)
         {
             using (var db = new AttendanceDbContext())

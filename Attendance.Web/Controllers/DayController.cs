@@ -41,6 +41,7 @@ namespace Attendance.Web.Controllers
             //ad esempio, passare dayId alla view per usare in AttendanceController
             ViewBag.DayId = id;
             return View();
+            //Views/{Controller}/{Action}.cshtml
         }
 
     }

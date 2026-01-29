@@ -31,6 +31,7 @@ namespace Attendance.Web.Controllers
         {
             return View();
             //serve solo x mostrare il form vuoto. non serve async o services
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // POST: Person/Create
@@ -45,6 +46,7 @@ namespace Attendance.Web.Controllers
             }
             //altrimenti...
             return View(model);
+            //Views/{Controller}/{Action}.cshtml
         }
 
         // GET: Person/Edit/5
@@ -67,6 +69,7 @@ namespace Attendance.Web.Controllers
                 return RedirectToAction("Index");
             }
             return View(model);
+            //Views/{Controller}/{Action}.cshtml
         }
 
     }
